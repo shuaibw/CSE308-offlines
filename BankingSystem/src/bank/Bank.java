@@ -1,6 +1,14 @@
+package bank;
+
+import accounts.*;
+import employees.Cashier;
+import employees.Employee;
+import employees.ManagingDirector;
+import employees.Officer;
+import util.LoanRequest;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class Bank {
     private final HashMap<String, Employee> employees;

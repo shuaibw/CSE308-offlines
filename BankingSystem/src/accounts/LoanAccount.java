@@ -1,3 +1,9 @@
+package accounts;
+
+import bank.Bank;
+import util.AccountType;
+import util.LoanRequest;
+
 public class LoanAccount extends Account {
     private static final double MAX_ALLOWED_LOAN_PERCENT = 5;
     private static double INTEREST_RATE = 0.0;
@@ -20,26 +26,12 @@ public class LoanAccount extends Account {
         }
     }
 
-    public static double getInterestRate() {
+    public double getInterestRate() {
         return INTEREST_RATE;
     }
 
     public static void setInterestRate(double interestRate) {
         INTEREST_RATE = interestRate;
-    }
-
-    @Override
-    public void updateInterest() {
-        double interestProfit = INTEREST_RATE * getCurrentBalance();
-        double interestExpense = Account.getLoanInterestRate() * getCurrentLoan();
-        double netChange = interestProfit - interestExpense - getServiceCharge();
-        setCurrentBalance(getCurrentBalance() + netChange);
-        double currentBalance = getCurrentBalance();
-        if (currentBalance < 0) {
-            setCurrentLoan(getCurrentLoan() + Math.abs(currentBalance));
-            setCurrentBalance(0);
-            System.out.printf("Insufficient balance for %s. Charge added to loan, current loan: %.2f\n", getName(), getCurrentLoan());
-        }
     }
 
     @Override

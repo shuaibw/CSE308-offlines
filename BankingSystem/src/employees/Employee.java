@@ -1,6 +1,13 @@
+package employees;
+
+import accounts.Account;
+import bank.Bank;
+import util.AccountType;
+import util.LoanRequest;
+
 import java.util.Scanner;
 
-abstract class Employee {
+public abstract class Employee {
     private final String name;
 
     public Employee(String name) {
@@ -62,6 +69,7 @@ abstract class Employee {
     }
 
     private void printPendingLoanRequests(Bank bank) {
+        System.out.println("--------------------");
         bank.getLoanReqLists().forEach(req -> {
             Account account = req.account;
             String name = account.getName();
@@ -70,6 +78,7 @@ abstract class Employee {
             double requestedLoan = req.requestedLoan;
             System.out.printf("Account: %s, type: %s, current loan: %.2f, requested loan: %.2f\n", name, type.name(), currentLoan, requestedLoan);
         });
+        System.out.println("--------------------");
     }
 
     public void changeInterestRate(AccountType type, double newInterestRate) {

@@ -1,3 +1,9 @@
+package bank;
+
+import accounts.*;
+import employees.Employee;
+import util.AccountType;
+
 import java.util.Scanner;
 
 public class BankSimulator {
@@ -31,7 +37,7 @@ public class BankSimulator {
     private static void incrementYear() {
         bank.getAccounts().forEach((name, account) -> {
             account.tickYear();
-            account.updateInterest();
+            account.updateInterest(account.getInterestRate());
         });
     }
 
@@ -86,7 +92,7 @@ public class BankSimulator {
             case SAVINGS -> account = new SavingsAccount(name, accountType, initialAmount);
             case LOAN -> account = new LoanAccount(name, accountType, initialAmount);
             case FIXED_DEPOSIT -> {
-                if (initialAmount >= 50000)
+                if (initialAmount >= 100000)
                     account = new FixedDepositAccount(name, accountType, initialAmount);
             }
         }

@@ -1,6 +1,8 @@
-class LoanRequest{
-    Account account;
-    double requestedLoan;
+package util;
+import accounts.Account;
+public class LoanRequest{
+    public Account account;
+    public double requestedLoan;
 
     public LoanRequest(Account account, double requestedLoan) {
         this.account = account;

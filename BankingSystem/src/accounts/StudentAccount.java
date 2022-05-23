@@ -1,3 +1,9 @@
+package accounts;
+
+import bank.Bank;
+import util.AccountType;
+import util.LoanRequest;
+
 public class StudentAccount extends Account {
     private static final double MAX_ALLOWED_LOAN = 1000;
     private static final double MAX_WITHDRAW_LIMIT = 10000;
@@ -26,21 +32,7 @@ public class StudentAccount extends Account {
         else System.out.printf("Loan amount must be less than %.2f$\n", MAX_ALLOWED_LOAN);
     }
 
-    @Override
-    public void updateInterest() {
-        double interestProfit = INTEREST_RATE * getCurrentBalance();
-        double interestExpense = Account.getLoanInterestRate() * getCurrentLoan();
-        double netChange = interestProfit - interestExpense - getServiceCharge();
-        setCurrentBalance(getCurrentBalance() + netChange);
-        double currentBalance = getCurrentBalance();
-        if (currentBalance < 0) {
-            setCurrentLoan(getCurrentLoan() + Math.abs(currentBalance));
-            setCurrentBalance(0);
-            System.out.printf("Insufficient balance for %s. Charge added to loan, current loan: %.2f\n", getName(), getCurrentLoan());
-        }
-    }
-
-    public static double getInterestRate() {
+    public double getInterestRate() {
         return INTEREST_RATE;
     }
 

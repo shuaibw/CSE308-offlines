@@ -1,5 +1,11 @@
-import java.util.Locale;
-import java.util.Scanner;
+package employees;
+
+import accounts.FixedDepositAccount;
+import accounts.LoanAccount;
+import accounts.SavingsAccount;
+import accounts.StudentAccount;
+import bank.Bank;
+import util.AccountType;
 
 public class ManagingDirector extends Employee {
     public ManagingDirector(String name) {

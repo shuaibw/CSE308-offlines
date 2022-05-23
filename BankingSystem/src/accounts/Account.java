@@ -1,4 +1,8 @@
-abstract class Account {
+package accounts;
+
+import util.AccountType;
+
+public abstract class Account {
     private final String name;
     private static final double LOAN_INTEREST_RATE = 0.1;
     private double serviceCharge = 500;
@@ -35,7 +39,7 @@ abstract class Account {
         }
     }
 
-    public static double getLoanInterestRate(){
+    public static double getLoanInterestRate() {
         return LOAN_INTEREST_RATE;
     }
 
@@ -72,7 +76,22 @@ abstract class Account {
         return year;
     }
 
-    public abstract void updateInterest();
+    public void updateInterest(double interestRate) {
+        double interestProfit = interestRate * currentBalance;
+        double interestExpense = LOAN_INTEREST_RATE * currentLoan;
+        double netChange = interestProfit - interestExpense - serviceCharge;
+        currentBalance += netChange;
+        if (currentBalance < 0) {
+            currentLoan += Math.abs(currentBalance);
+            currentBalance = 0;
+            System.out.printf("""
+                    Insufficient balance for %s [%s]
+                    Cannot deduct from main balance, charge added to loan, current loan: %.2f
+                    """, getName(), getType().name(), getCurrentLoan());
+        }
+    }
+
+    public abstract double getInterestRate();
 
     public void printCreationMessage() {
         System.out.printf("%s account for %s created; initial balance %.2f$\n", type, name, currentBalance);
